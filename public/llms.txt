@@ -1,0 +1,53 @@
+# POWER SUB — Generative Engine Optimization Map
+
+> A בידור ותרבות business.
+
+---
+
+## Pages
+
+### Home
+https://power-sub-3df5dc0f.zappy5.app
+
+### Shows & Community
+https://power-sub-3df5dc0f.zappy5.app/shows
+
+### Events & Culture
+https://power-sub-3df5dc0f.zappy5.app/events
+
+### Contact
+https://power-sub-3df5dc0f.zappy5.app/contact
+
+## Legal & Policy
+
+### Privacy Policy
+https://power-sub-3df5dc0f.zappy5.app/privacy
+Information about how user data is collected, stored, and protected.
+
+### Terms & Conditions
+https://power-sub-3df5dc0f.zappy5.app/terms
+Legal terms describing service usage, rights, and policies.
+
+### Accessibility Statement
+https://power-sub-3df5dc0f.zappy5.app/accessibility
+Information about WCAG compliance and accessibility features.
+
+---
+
+# Business Context (for LLM understanding)
+
+## About POWER SUB
+POWER SUB is a business in the בידור ותרבות industry.
+
+## Target Audience
+אוהבי אנימה
+
+## Industry
+בידור ותרבות
+
+---
+
+# Additional Resources
+
+- **Sitemap**: https://power-sub-3df5dc0f.zappy5.app/sitemap.xml
+- **Robots.txt**: https://power-sub-3df5dc0f.zappy5.app/robots.txt

@@ -1,0 +1,823 @@
+<!DOCTYPE html><html lang="he" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>הופעות וקהילה - POWER SUB</title>
+  <meta name="description" content="Shows &amp; Community - POWER SUB provides professional בידור ותרבות services. Specializing in אנימות מתורגמות לעברית.">
+  <meta name="keywords" content="אנימות מתורגמות לעברית, jbl powered subwoofer, best powered subwoofer, POWER SUB">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="הופעות וקהילה - POWER SUB">
+  <meta property="og:description" content="Shows &amp; Community - POWER SUB provides professional בידור ותרבות services. Specializing in אנימות מתורגמות לעברית.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="הופעות וקהילה - POWER SUB">
+  <meta name="twitter:description" content="Shows &amp; Community - POWER SUB provides professional בידור ותרבות services. Specializing in אנימות מתורגמות לעברית.">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+<!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: '3df5dc0f-bdff-4a5f-b267-8dbd62646bf0',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; background: transparent !important; border: none !important; cursor: pointer !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+</head>
+<body>
+  <nav class="navbar" dir="rtl">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="תפריט">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+  
+  <button class="phone-header-btn" aria-label="התקשר">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+  
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/business-logo.webp" alt="POWER SUB" class="logo" />
+      </a>
+    </div>
+    
+    <ul class="nav-menu" id="navMenu"><li><a href="/shows">הופעות וקהילה</a></li><li><a href="/events">אירועים ותרבות</a></li></ul>
+    
+    <div class="nav-cta-container">
+      <a href="/contact" class="nav-cta-btn">צור קשר</a>
+    </div>
+  </div>
+</nav>
+  
+  <main>
+    <section class="shows-community-intro-section" data-layout-spec="Shows &amp; Community-intro">
+  <div class="shows-community-intro-container">
+    <div class="shows-community-intro-header">
+      <h1 class="shows-community-intro-title">גלו סדרות אנימה מתורגמות ולוחות דיון תוססים</h1>
+      <p class="shows-community-intro-description">שילוב מושלם בין צפייה מאורגנת לשיחות מרתקות. כאן תמצאו אנימות מתורגמות לעברית ברמה הגבוהה ביותר, לצד קהילה פעילה שחולקת תובנות, ממליצה על סדרות חדשות ומעמיקה בפרטי העלילה.</p>
+    </div>
+
+    <div class="shows-community-intro-content">
+      <div class="shows-community-intro-how-it-works">
+        <h2 class="shows-community-intro-subtitle">איך זה עובד?</h2>
+        <p class="shows-community-intro-text">דפדפו בין כותרים מאורגנים לפי ז'אנרים ועונות, קראו תקצירים מפורטים והצטרפו ללוחות הדיון שלנו. כל סדרה מלווה בפורום ייעודי שבו תוכלו לשתף רגעים מועדפים, להמליץ על פרקים ולהתחבר עם חובבי אנימה נוספים.</p>
+      </div>
+
+      <div class="shows-community-intro-metrics">
+        <div class="shows-community-intro-metric-item">
+          <svg class="shows-community-intro-metric-icon" data-element-type="icon" data-icon-type="svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+          </svg>
+          <span class="shows-community-intro-metric-label">בחירות אוצרות ומומלצות</span>
+        </div>
+        <div class="shows-community-intro-metric-item">
+          <svg class="shows-community-intro-metric-icon" data-element-type="icon" data-icon-type="svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle>
+            <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <span class="shows-community-intro-metric-label">לוחות דיון פעילים ומעורבים</span>
+        </div>
+        <div class="shows-community-intro-metric-item">
+          <svg class="shows-community-intro-metric-icon" data-element-type="icon" data-icon-type="svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"></rect>
+            <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></line>
+            <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></line>
+            <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></line>
+          </svg>
+          <span class="shows-community-intro-metric-label">הדגשים שבועיים ועדכונים קבועים</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shows-community-catalog-section" data-layout-spec="Shows &amp; Community-catalog">
+  <div class="shows-community-catalog-container">
+    <div class="shows-community-catalog-header">
+      <h2>ספריית תוכן מוקפדת</h2>
+      <p>אוסף נבחר של אנימות מתורגמות לעברית, עונות מלאות ופרקים חדשים שמתעדכנים באופן קבוע. כל סדרה נבחרה בקפידה על פי איכות התרגום, רלוונטיות לקהילה והתאמה לטעמים השונים של אוהבי האנימה בישראל.</p>
+    </div>
+
+    <div class="shows-community-catalog-grid">
+      <article class="shows-community-catalog-card">
+        <div class="shows-community-catalog-card-image-wrapper">
+          <img data-placeholder="shows-community-catalog-image-1" data-context="Cinematic anime scene with dramatic lighting, showing a heroic character in action pose against a vibrant sunset sky, 16:9 aspect ratio, grain texture overlay, professional anime screenshot quality" width="600" height="338" src="/assets/site-shows-community-catalog-image-1.webp" alt="תמונת אנימה דרמטית">
+          <div class="shows-community-catalog-card-overlay"></div>
+        </div>
+        <div class="shows-community-catalog-card-content">
+          <h3>התקפת הטיטאנים</h3>
+          <p>אפוס אפל ומרתק על האנושות האחרונה המתמודדת עם יצורים ענקיים. <span class="shows-community-catalog-episode-marker">EP 75</span></p>
+          <div class="shows-community-catalog-progress-bar">
+            <div class="shows-community-catalog-progress-fill" style="width: 85%"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shows-community-catalog-card">
+        <div class="shows-community-catalog-card-image-wrapper">
+          <img data-placeholder="shows-community-catalog-image-2" data-context="Colorful anime scene featuring multiple characters in school uniforms, bright cheerful atmosphere, cherry blossoms in background, 16:9 format, cinematic grain effect" width="600" height="338" src="/assets/site-shows-community-catalog-image-2.webp" alt="סצנת אנימה בית ספרית">
+          <div class="shows-community-catalog-card-overlay"></div>
+        </div>
+        <div class="shows-community-catalog-card-content">
+          <h3>האקדמיה שלי לגיבורים</h3>
+          <p>סיפור מעורר השראה על נער חסר כוחות שחולם להיות גיבור-על. <span class="shows-community-catalog-episode-marker">EP 113</span></p>
+          <div class="shows-community-catalog-progress-bar">
+            <div class="shows-community-catalog-progress-fill" style="width: 62%"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shows-community-catalog-card">
+        <div class="shows-community-catalog-card-image-wrapper">
+          <img data-placeholder="shows-community-catalog-image-3" data-context="Dark mysterious anime scene with supernatural elements, glowing eyes in shadows, moody atmospheric lighting, 16:9 cinematic composition with film grain" width="600" height="338" src="/assets/site-shows-community-catalog-image-3.webp" alt="סצנת אנימה מיסטית">
+          <div class="shows-community-catalog-card-overlay"></div>
+        </div>
+        <div class="shows-community-catalog-card-content">
+          <h3>ציידי השדים</h3>
+          <p>מסע מרגש של אח שנלחם להציל את אחותו מקללת שד עתיק. <span class="shows-community-catalog-episode-marker">EP 26</span></p>
+          <div class="shows-community-catalog-progress-bar">
+            <div class="shows-community-catalog-progress-fill" style="width: 100%"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shows-community-catalog-card">
+        <div class="shows-community-catalog-card-image-wrapper">
+          <img data-placeholder="shows-community-catalog-image-4" data-context="Futuristic cyberpunk anime cityscape at night, neon lights reflecting on wet streets, high-tech atmosphere, 16:9 widescreen format with cinematic grain" width="600" height="338" src="/assets/site-shows-community-catalog-image-4.webp" alt="נוף עירוני סייברפאנק">
+          <div class="shows-community-catalog-card-overlay"></div>
+        </div>
+        <div class="shows-community-catalog-card-content">
+          <h3>קאובוי ביבופ</h3>
+          <p>קלאסיקת ספייס-ווסטרן עם פסקול ג'אז אגדי וסיפורים עמוקים. <span class="shows-community-catalog-episode-marker">EP 26</span></p>
+          <div class="shows-community-catalog-progress-bar">
+            <div class="shows-community-catalog-progress-fill" style="width: 45%"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shows-community-catalog-card">
+        <div class="shows-community-catalog-card-image-wrapper">
+          <img data-placeholder="shows-community-catalog-image-5" data-context="Epic fantasy anime battle scene with magical effects, warriors in armor, dramatic sky background, 16:9 cinematic aspect ratio with film grain texture" width="600" height="338" src="/assets/site-shows-community-catalog-image-5.webp" alt="קרב פנטזיה אפי">
+          <div class="shows-community-catalog-card-overlay"></div>
+        </div>
+        <div class="shows-community-catalog-card-content">
+          <h3>חרב של השמדה</h3>
+          <p>הרפתקת פנטזיה מרהיבה בעולם קסום מלא במפלצות ואבירים. <span class="shows-community-catalog-episode-marker">EP 12</span></p>
+          <div class="shows-community-catalog-progress-bar">
+            <div class="shows-community-catalog-progress-fill" style="width: 30%"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shows-community-catalog-card">
+        <div class="shows-community-catalog-card-image-wrapper">
+          <img data-placeholder="shows-community-catalog-image-6" data-context="Romantic anime scene with two characters under starry night sky, soft lighting, emotional atmosphere, 16:9 widescreen with subtle grain effect" width="600" height="338" src="/assets/site-shows-community-catalog-image-6.webp" alt="סצנה רומנטית">
+          <div class="shows-community-catalog-card-overlay"></div>
+        </div>
+        <div class="shows-community-catalog-card-content">
+          <h3>השם שלך</h3>
+          <p>סיפור אהבה מרגש שמשלב חילופי גופות ונסיעות בזמן באופן קסום. <span class="shows-community-catalog-episode-marker">MOVIE</span></p>
+          <div class="shows-community-catalog-progress-bar">
+            <div class="shows-community-catalog-progress-fill" style="width: 100%"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shows-community-catalog-card">
+        <div class="shows-community-catalog-card-image-wrapper">
+          <img data-placeholder="shows-community-catalog-image-7" data-context="Action-packed anime scene with intense combat, speed lines, dynamic movement, explosive effects, 16:9 cinematic format with film grain" width="600" height="338" src="/assets/site-shows-community-catalog-image-7.webp" alt="סצנת פעולה אינטנסיבית">
+          <div class="shows-community-catalog-card-overlay"></div>
+        </div>
+        <div class="shows-community-catalog-card-content">
+          <h3>וואן פאנץ' מן</h3>
+          <p>קומדיה על גיבור-על שמנצח כל אויב במכה אחת ומחפש אתגר אמיתי. <span class="shows-community-catalog-episode-marker">EP 24</span></p>
+          <div class="shows-community-catalog-progress-bar">
+            <div class="shows-community-catalog-progress-fill" style="width: 70%"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shows-community-catalog-card">
+        <div class="shows-community-catalog-card-image-wrapper">
+          <img data-placeholder="shows-community-catalog-image-8" data-context="Psychological thriller anime scene, dark moody atmosphere, mysterious character silhouette, dramatic shadows, 16:9 widescreen with cinematic grain" width="600" height="338" src="/assets/site-shows-community-catalog-image-8.webp" alt="סצנה פסיכולוגית מתוחה">
+          <div class="shows-community-catalog-card-overlay"></div>
+        </div>
+        <div class="shows-community-catalog-card-content">
+          <h3>מחברת המוות</h3>
+          <p>מותחן פסיכולוגי על תלמיד גאון שמוצא מחברת שיכולה להרוג. <span class="shows-community-catalog-episode-marker">EP 37</span></p>
+          <div class="shows-community-catalog-progress-bar">
+            <div class="shows-community-catalog-progress-fill" style="width: 55%"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shows-community-catalog-card">
+        <div class="shows-community-catalog-card-image-wrapper">
+          <img data-placeholder="shows-community-catalog-image-9" data-context="Slice of life anime scene in cozy Japanese cafe, warm lighting, detailed interior, comfortable atmosphere, 16:9 format with subtle film grain" width="600" height="338" src="/assets/site-shows-community-catalog-image-9.webp" alt="סצנת חיים יומיומית">
+          <div class="shows-community-catalog-card-overlay"></div>
+        </div>
+        <div class="shows-community-catalog-card-content">
+          <h3>K-ON!</h3>
+          <p>סדרה חמה על קבוצת נערות שמקימות להקת רוק בתיכון. <span class="shows-community-catalog-episode-marker">EP 39</span></p>
+          <div class="shows-community-catalog-progress-bar">
+            <div class="shows-community-catalog-progress-fill" style="width: 90%"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shows-community-catalog-card">
+        <div class="shows-community-catalog-card-image-wrapper">
+          <img data-placeholder="shows-community-catalog-image-10" data-context="Mecha anime scene with giant robot in combat pose, futuristic battlefield, dramatic lighting, 16:9 cinematic composition with grain texture" width="600" height="338" src="/assets/site-shows-community-catalog-image-10.webp" alt="רובוט ענק בקרב">
+          <div class="shows-community-catalog-card-overlay"></div>
+        </div>
+        <div class="shows-community-catalog-card-content">
+          <h3>אוונגליון</h3>
+          <p>יצירת מופת פסיכולוגית על טייסי רובוטים צעירים שמגינים על האנושות. <span class="shows-community-catalog-episode-marker">EP 26</span></p>
+          <div class="shows-community-catalog-progress-bar">
+            <div class="shows-community-catalog-progress-fill" style="width: 40%"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shows-community-catalog-card">
+        <div class="shows-community-catalog-card-image-wrapper">
+          <img data-placeholder="shows-community-catalog-image-11" data-context="Sports anime scene showing intense volleyball match, dynamic action, energetic atmosphere, gym setting, 16:9 format with cinematic grain" width="600" height="338" src="/assets/site-shows-community-catalog-image-11.webp" alt="משחק כדורעף אינטנסיבי">
+          <div class="shows-community-catalog-card-overlay"></div>
+        </div>
+        <div class="shows-community-catalog-card-content">
+          <h3>הייקיו!!</h3>
+          <p>דרמת ספורט מרגשת על קבוצת כדורעף תיכונית שחולמת על אליפות. <span class="shows-community-catalog-episode-marker">EP 85</span></p>
+          <div class="shows-community-catalog-progress-bar">
+            <div class="shows-community-catalog-progress-fill" style="width: 75%"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shows-community-catalog-card">
+        <div class="shows-community-catalog-card-image-wrapper">
+          <img data-placeholder="shows-community-catalog-image-12" data-context="Adventure anime scene with pirates on ship deck, ocean waves, treasure map, exciting atmosphere, 16:9 widescreen with film grain texture" width="600" height="338" src="/assets/site-shows-community-catalog-image-12.webp" alt="הרפתקת פיראטים">
+          <div class="shows-community-catalog-card-overlay"></div>
+        </div>
+        <div class="shows-community-catalog-card-content">
+          <h3>וואן פיס</h3>
+          <p>אפוס הרפתקאות אגדי על צוות פיראטים שמחפשים את האוצר האולטימטיבי. <span class="shows-community-catalog-episode-marker">EP 1000+</span></p>
+          <div class="shows-community-catalog-progress-bar">
+            <div class="shows-community-catalog-progress-fill" style="width: 20%"></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="shows-community-forum-boards-section" data-layout-spec="Shows &amp; Community-forum-boards">
+  <div class="shows-community-forum-boards-container">
+    <div class="shows-community-forum-boards-header">
+      <h2>פורומים ודיונים</h2>
+      <p>מרחב לשיחות מכבדות, תובנות משותפות וחוויות צפייה מעוררות השראה. הצטרפו לקהילה שלנו ושתפו את האהבה לאנימה ותרבות.</p>
+    </div>
+    
+    <div class="shows-community-forum-boards-list">
+      <div class="shows-community-forum-board-row">
+        <div class="shows-community-forum-board-icon">
+          <svg data-element-type="icon" data-icon-type="svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <div class="shows-community-forum-board-content">
+          <h3>הוצאות חדשות</h3>
+          <p>דיונים על אנימות מתורגמות לעברית שזה עתה יצאו, פרקים חדשים ועדכונים טריים מעולם האנימה.</p>
+        </div>
+        <div class="shows-community-forum-board-meta">
+          <div class="shows-community-forum-meta-item">
+            <span class="shows-community-forum-meta-label">נושא אחרון:</span>
+            <span class="shows-community-forum-meta-value">"פרק 12 מדהים"</span>
+          </div>
+          <div class="shows-community-forum-meta-item">
+            <span class="shows-community-forum-meta-label">פוסטים/שבוע:</span>
+            <span class="shows-community-forum-meta-value">342</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="shows-community-forum-board-row">
+        <div class="shows-community-forum-board-icon">
+          <svg data-element-type="icon" data-icon-type="svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"></circle>
+            <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div class="shows-community-forum-board-content">
+          <h3>תרבות קלאסית</h3>
+          <p>חגיגה של אנימות קלאסיות, סדרות נוסטלגיות ויצירות מופת שעיצבו את התעשייה.</p>
+        </div>
+        <div class="shows-community-forum-board-meta">
+          <div class="shows-community-forum-meta-item">
+            <span class="shows-community-forum-meta-label">נושא אחרון:</span>
+            <span class="shows-community-forum-meta-value">"הזיכרונות שלי מ-90"</span>
+          </div>
+          <div class="shows-community-forum-meta-item">
+            <span class="shows-community-forum-meta-label">פוסטים/שבוע:</span>
+            <span class="shows-community-forum-meta-value">187</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="shows-community-forum-board-row">
+        <div class="shows-community-forum-board-icon">
+          <svg data-element-type="icon" data-icon-type="svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"></rect>
+            <path d="M8 21H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            <path d="M12 17V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            <path d="M9 8L12 11L15 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <div class="shows-community-forum-board-content">
+          <h3>ניתוח סצנות</h3>
+          <p>צלילה עמוקה לתוך סצנות מפתח, סימבוליזם ויזואלי וטכניקות אנימציה מתקדמות.</p>
+        </div>
+        <div class="shows-community-forum-board-meta">
+          <div class="shows-community-forum-meta-item">
+            <span class="shows-community-forum-meta-label">נושא אחרון:</span>
+            <span class="shows-community-forum-meta-value">"הקרב הגדול - פירוק"</span>
+          </div>
+          <div class="shows-community-forum-meta-item">
+            <span class="shows-community-forum-meta-label">פוסטים/שבוע:</span>
+            <span class="shows-community-forum-meta-value">256</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="shows-community-forum-board-row">
+        <div class="shows-community-forum-board-icon">
+          <svg data-element-type="icon" data-icon-type="svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18V5L21 12L9 19V18Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M5 5V19" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div class="shows-community-forum-board-content">
+          <h3>מועדון הפסקול</h3>
+          <p>דיונים על מוזיקה, פסי קול אייקוניים ויוצרים מוזיקליים שמעצבים את עולם האנימה.</p>
+        </div>
+        <div class="shows-community-forum-board-meta">
+          <div class="shows-community-forum-meta-item">
+            <span class="shows-community-forum-meta-label">נושא אחרון:</span>
+            <span class="shows-community-forum-meta-value">"10 פסי קול מושלמים"</span>
+          </div>
+          <div class="shows-community-forum-meta-item">
+            <span class="shows-community-forum-meta-label">פוסטים/שבוע:</span>
+            <span class="shows-community-forum-meta-value">198</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="shows-community-forum-board-row">
+        <div class="shows-community-forum-board-icon">
+          <svg data-element-type="icon" data-icon-type="svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <div class="shows-community-forum-board-content">
+          <h3>תיאוריות מעריצים</h3>
+          <p>השערות, ניבויים וניתוחים יצירתיים על עלילות, דמויות ופיתוחים עתידיים.</p>
+        </div>
+        <div class="shows-community-forum-board-meta">
+          <div class="shows-community-forum-meta-item">
+            <span class="shows-community-forum-meta-label">נושא אחרון:</span>
+            <span class="shows-community-forum-meta-value">"התיאוריה שלי על הסוף"</span>
+          </div>
+          <div class="shows-community-forum-meta-item">
+            <span class="shows-community-forum-meta-label">פוסטים/שבוע:</span>
+            <span class="shows-community-forum-meta-value">412</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="shows-community-forum-board-row">
+        <div class="shows-community-forum-board-icon">
+          <svg data-element-type="icon" data-icon-type="svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 19L19 12L22 15L15 22L12 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M18 13L16.5 5.5L2 2L5.5 16.5L13 18L18 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M2 2L9.586 9.586" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle cx="11" cy="11" r="2" stroke="currentColor" stroke-width="2"></circle>
+          </svg>
+        </div>
+        <div class="shows-community-forum-board-content">
+          <h3>פינת היוצרים</h3>
+          <p>מרחב לאמנים, כותבים ויוצרי תוכן לשתף עבודות מקוריות, פאן-ארט ופרויקטים יצירתיים.</p>
+        </div>
+        <div class="shows-community-forum-board-meta">
+          <div class="shows-community-forum-meta-item">
+            <span class="shows-community-forum-meta-label">נושא אחרון:</span>
+            <span class="shows-community-forum-meta-value">"הציור החדש שלי"</span>
+          </div>
+          <div class="shows-community-forum-meta-item">
+            <span class="shows-community-forum-meta-label">פוסטים/שבוע:</span>
+            <span class="shows-community-forum-meta-value">289</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shows-community-faq-section" data-layout-spec="Shows &amp; Community-faq">
+  <div class="shows-community-faq-container">
+    <div class="shows-community-faq-intro">
+      <h2>שאלות נפוצות</h2>
+      <p>כל מה שרציתם לדעת על POWER SUB – מהאוסף שלנו ועד הקהילה התוססת שמקיפה אותו. מצאו תשובות לשאלות הנפוצות ביותר.</p>
+    </div>
+
+    <div class="shows-community-faq-grid">
+      <div class="shows-community-faq-item">
+        <h3>איך עובד תהליך האוצרות שלכם?</h3>
+        <p>אנחנו בוחרים בקפידה אנימות מתורגמות לעברית שמשלבות עלילה מרתקת, אנימציה איכותית וערך תרבותי. כל סדרה עוברת בחינה קפדנית לפני שהיא מגיעה לפלטפורמה, כדי להבטיח חוויית צפייה מושלמת לקהילה שלנו.</p>
+      </div>
+
+      <div class="shows-community-faq-item">
+        <h3>איך הדיונים מתנהלים בקהילה?</h3>
+        <p>הקהילה שלנו מבוססת על כבוד הדדי ואהבה משותפת לאנימה. יש לנו מנחים שמוודאים שהשיחות נשארות חיוביות ובונות, ומעודדים דיונים עמוקים על עלילות, דמויות וטכניקות אנימציה. כל חבר יכול להשתתף בחופשיות.</p>
+      </div>
+
+      <div class="shows-community-faq-item">
+        <h3>איזה סוגי תוכן מכוסים ב-POWER SUB?</h3>
+        <p>אנחנו מתמקדים באנימה יפנית מקורית עם תרגום עברי איכותי – מז'אנרים כמו שונן, סיינן, מכה, פנטזיה, מדע בדיוני ודרמה. בנוסף, אנחנו מציעים ביקורות מעמיקות, מדריכים לצופים חדשים, ותוכן בלעדי שמעשיר את חוויית הצפייה.</p>
+      </div>
+
+      <div class="shows-community-faq-item">
+        <h3>האם אפשר להציע סדרות חדשות?</h3>
+        <p>בהחלט! אנחנו מעודדים את הקהילה להציע אנימות שהם אוהבים. יש לנו טופס הצעות ייעודי שבו תוכלו לשתף את הסדרות האהובות עליכם, ואנחנו בוחנים כל הצעה ברצינות. הרבה מהתכנים הפופולריים שלנו הגיעו מהמלצות של הקהילה.</p>
+      </div>
+
+      <div class="shows-community-faq-item">
+        <h3>איך אפשר לשתף פעולה עם POWER SUB?</h3>
+        <p>אנחנו תמיד מחפשים שותפים יצירתיים – בין אם אתם מתרגמים, יוצרי תוכן, או פשוט חובבי אנימה נלהבים. אפשר ליצור קשר דרך דף יצירת הקשר שלנו ולספר לנו על הרעיונות שלכם. נשמח לשמוע מכם!</p>
+      </div>
+
+      <div class="shows-community-faq-item">
+        <h3>האם יש אירועים קהילתיים?</h3>
+        <p>כן! אנחנו מארגנים צפיות משותפות, מפגשי דיון חיים, ואירועים מיוחדים סביב הקרנות בכורה ועונות חדשות. כל האירועים מתפרסמים בעמוד הקהילה שלנו ובניוזלטר החודשי. זו הזדמנות מעולה להכיר חברים חדשים ולחגוג יחד את האנימה שאנחנו אוהבים.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shows-community-cta-section" data-layout-spec="Shows &amp; Community-cta">
+  <div class="shows-community-cta-container">
+    <div class="shows-community-cta-content">
+      <h2 class="shows-community-cta-title">רוצים שהקהילה שלכם תוצג אצלנו?</h2>
+      <p class="shows-community-cta-description">אנחנו מזמינים שותפויות, מועדונים וקבוצות תרבות להצטרף למשפחת POWER SUB. בואו נספר ביחד את הסיפור שלכם לקהילת אוהבי האנימה בישראל.</p>
+      <a href="/contact" class="shows-community-cta-btn btn-primary">התחילו שיחה</a>
+      
+      <div class="shows-community-cta-alternatives">
+        <div class="shows-community-cta-alternative-item">
+          <span class="shows-community-cta-alternative-icon">
+            <svg data-element-type="icon" data-icon-type="svg" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 4H5C3.89543 4 3 4.89543 3 6V18C3 19.1046 3.89543 20 5 20H19C20.1046 20 21 19.1046 21 18V6C21 4.89543 20.1046 4 19 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M3 6L12 13L21 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <span class="shows-community-cta-alternative-text">פניות עיתונאיות ותקשורת</span>
+        </div>
+        <div class="shows-community-cta-alternative-item">
+          <span class="shows-community-cta-alternative-icon">
+            <svg data-element-type="icon" data-icon-type="svg" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45768C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <span class="shows-community-cta-alternative-text">בקשות שיתופי פעולה ופרויקטים משותפים</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="shows-community-cta-accent-line"></div>
+</section>
+  </main>
+  
+  <footer class="site-footer"><div class="footer-container"><div class="footer-main"><div class="footer-column footer-about"><img src="/assets/business-logo.webp" alt="POWER SUB" class="logo" /><p class="footer-description">המקום שלך לבידור ותרבות איכותית. הצטרפו אלינו לחוויה בלתי נשכחת של מופעים, אירועים ותוכן מרתק.</p><div class="footer-social"><a href="[facebook_handle]" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="[instagram_handle]" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="[whatsapp_handle]" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div></div><div class="footer-column footer-links"><h3>קישורים מהירים</h3><ul><li><a href="/shows">מופעים וקהילה</a></li><li><a href="/events">אירועים ותרבות</a></li><li><a href="/contact">צור קשר</a></li></ul></div><div class="footer-column footer-contact"><h3>יצירת קשר</h3><ul><li><i class="fas fa-envelope"></i><a href="mailto:[business_email]">[business_email]</a></li><li><i class="fas fa-phone"></i><a href="tel:[business_phone]">[business_phone]</a></li><li><a href="/"><i class="fas fa-map-marker-alt"></i><span>[business_address]</span></a></li></ul></div></div><div class="footer-bottom"><div class="footer-legal"><a href="/privacy">מדיניות פרטיות</a><span class="separator">|</span><a href="/terms">תנאים והגבלות</a><span class="separator">|</span><a href="/accessibility">הצהרת נגישות</a></div><div class="footer-copyright"><p>© 2026 POWER SUB. כל הזכויות שמורות.</p><a href="https://zappy5.com" target="_blank" class="zappy-attribution">Generated by Zappy</a></div></div></div></footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <script src="/script.js"></script>
+
+    <div data-integration="accessibility:toolbar"></div>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+</body></html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://power-sub-3df5dc0f.zappy5.app/sitemap.xml
